@@ -1,5 +1,5 @@
 {
-    "name": "novosga/core",
+    "name": "mardoniosc/core",
     "license": "MIT",
     "type": "library",
     "autoload": {
@@ -10,7 +10,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "tec": "2.1.0"
         }
     }
 }

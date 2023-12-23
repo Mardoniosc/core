@@ -123,6 +123,8 @@ class Usuario implements
      */
     private $deletedAt;
 
+    private $permissoes;
+
     public function __construct()
     {
         $this->ativo = true;
@@ -455,5 +457,49 @@ class Usuario implements
     public function __tostring()
     {
         return (string) $this->getLogin();
+    }
+
+    public function getAtivo(): ?bool
+    {
+        return $this->ativo;
+    }
+
+    public function getAdmin(): ?bool
+    {
+        return $this->admin;
+    }
+
+    public function getPermissoes(): ?array
+    {
+        return $this->permissoes;
+    }
+
+    public function setPermissoes(?array $permissoes): self
+    {
+        $this->permissoes = $permissoes;
+
+        return $this;
+    }
+
+    public function addLotaco(Lotacao $lotaco): self
+    {
+        if (!$this->lotacoes->contains($lotaco)) {
+            $this->lotacoes[] = $lotaco;
+            $lotaco->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLotaco(Lotacao $lotaco): self
+    {
+        if ($this->lotacoes->removeElement($lotaco)) {
+            // set the owning side to null (unless already changed)
+            if ($lotaco->getUsuario() === $this) {
+                $lotaco->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }
